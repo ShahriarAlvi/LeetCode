@@ -2,8 +2,9 @@ class Solution {
 public:
     int possibleStringCount(string word) {
         int sum = 1;
+        int n = word.length();
 
-        for (int i = 1; i < word.size(); i++) {
+        for (int i = 1; i < n; i++) {
             if (word[i] == word[i - 1])
                 sum++;
         }
