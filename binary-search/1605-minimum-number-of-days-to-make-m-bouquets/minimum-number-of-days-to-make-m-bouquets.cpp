@@ -2,9 +2,10 @@ class Solution {
 public:
     int minDays(vector<int>& bloomDay, int m, int k) {
         int n = bloomDay.size();
-        if ((long long int)n < ((long long int)m * (long long int)k))
+        if (n < (long long int)m * k)
             return -1;
         int min_val = INT_MAX, max_val = INT_MIN;
+        int result = -1;
 
         for (int i = 0; i < n; i++) {
             min_val = min(min_val, bloomDay[i]);
@@ -15,12 +16,13 @@ public:
 
         while (left <= right) {
             mid = left + (right - left) / 2;
-            if (possible(bloomDay, m, k, mid))
+            if (possible(bloomDay, m, k, mid)) {
+                result = mid;
                 right = mid - 1;
-            else
+            } else
                 left = mid + 1;
         }
-        return left;
+        return result;
     }
 
     bool possible(vector<int>& bloom, int m, int k, int day) {
@@ -29,14 +31,16 @@ public:
         for (int i = 0; i < n; i++) {
             if (bloom[i] <= day) {
                 cnt++;
+                if (cnt == k) {
+                    sum++;
+                    cnt = 0;
+                    if (sum >= m)
+                        return true;
+                }
             } else {
-                sum += floor((double)cnt / (double)k);
                 cnt = 0;
-                if (sum >= m)
-                    return true;
             }
         }
-        sum += floor((double)cnt / (double)k);
-        return (sum >= m) ? true : false;
+        return sum >= m;
     }
 };
