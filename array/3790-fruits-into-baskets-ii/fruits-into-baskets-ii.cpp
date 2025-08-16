@@ -5,20 +5,16 @@ public:
         int count = 0;
 
         for (int i = 0; i < n; i++) {
-            bool flag = false;
+            int flag = 1;
             for (int j = 0; j < n; j++) {
                 if (fruits[i] <= baskets[j]) {
-                    baskets[j] = INT_MIN;
-                    flag = true;
+                    baskets[j] = 0;
+                    flag = 0;
                     break;
                 }
             }
-            if (!flag) {
-                count++;
-                // cout << fruits[i] << endl;
-            }
+            count += flag;
         }
-
         return count;
     }
 };
