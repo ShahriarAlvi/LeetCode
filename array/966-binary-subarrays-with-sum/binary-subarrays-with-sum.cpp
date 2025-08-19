@@ -1,20 +1,22 @@
 class Solution {
 public:
     int numSubarraysWithSum(vector<int>& nums, int goal) {
+        return slidingAt(nums, goal) - slidingAt(nums, goal - 1);
+    }
+
+private:
+    int slidingAt(vector<int>& nums, int goal) {
         int sum = 0, result = 0;
         int n = nums.size();
-
-        unordered_map<int, int> mp;
+        int left = 0;
 
         for (int i = 0; i < n; i++) {
             sum += nums[i];
-            if (sum == goal) {
-                result++;
+            while (left <= i && sum > goal) {
+                sum = sum - nums[left];
+                left++;
             }
-            if (mp.find(sum - goal) != mp.end()) {
-                result += mp[sum - goal];
-            }
-            mp[sum]++;
+            result += i - left + 1;
         }
 
         return result;
