@@ -1,16 +1,16 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        unordered_map<char, int> mp;
+        vector<int> track(3, 0);
         int n = s.length();
         int left = 0;
         int result = 0;
 
         for (int i = 0; i < n; i++) {
-            mp[s[i]]++;
-            while (mp['a'] > 0 && mp['b'] > 0 && mp['c'] > 0) {
+            track[s[i] - 'a']++;
+            while (track[0] > 0 && track[1] > 0 && track[2] > 0) {
                 result += n - i;
-                mp[s[left]]--;
+                track[s[left] - 'a']--;
                 left++;
             }
         }
