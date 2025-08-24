@@ -12,9 +12,9 @@ public:
             if (d2 >= 0)
                 sum += b[d2--] - '0';
             carry = sum / 2;
-            result = (char)('0' + (sum % 2)) + result;
+            result += '0' + (sum % 2);
         }
-
+        reverse(result.begin(), result.end());
         return result;
     }
 };
