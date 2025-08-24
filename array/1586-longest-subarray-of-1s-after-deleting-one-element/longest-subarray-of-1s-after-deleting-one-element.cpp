@@ -3,22 +3,22 @@ public:
     int longestSubarray(vector<int>& nums) {
         int n = nums.size();
 
-        int left = 0, sum = 0, total = 0;
+        int left = 0, total = 0;
         bool flag = false;
 
-        for (int i = 0; i < n; i++) {
-            int a = nums[i];
+        for (int right = 0; right < n; right++) {
+            int a = nums[right];
 
             if (!a) {
                 if (!flag)
                     flag = true;
                 else {
-                    while (left < i && nums[left])
+                    while (left <= right && nums[left])
                         left++;
                     left++;
                 }
             }
-            total = max(total, i - left);
+            total = max(total, right - left);
         }
 
         return total;
