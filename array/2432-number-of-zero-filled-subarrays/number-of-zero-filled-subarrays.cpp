@@ -1,16 +1,16 @@
 class Solution {
 public:
     long long zeroFilledSubarray(vector<int>& nums) {
-        int left = 0;
+        int streak = 0;
         int n = nums.size();
         long long int sum = 0;
 
-        for (int right = 0; right < n; right++) {
-            if (nums[right] == 0) {
-                sum += (right - left + 1);
-            } else {
-                left = right + 1;
-            }
+        for (int i = 0; i < n; i++) {
+            if (nums[i] == 0) {
+                streak++;
+                sum += streak;
+            } else
+                streak = 0;
         }
 
         return sum;
