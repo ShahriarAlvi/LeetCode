@@ -6,7 +6,7 @@ public:
         unordered_set<int> track;
 
         for (int i = 0; i < n; i++) {
-            if (track.find(nums[i]) != track.end())
+            if (track.count(nums[i]))
                 return true;
             track.insert(nums[i]);
         }
