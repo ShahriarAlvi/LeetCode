@@ -9,10 +9,14 @@ public:
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == 1) {
-                    row_max = max(row_max, i);
-                    col_max = max(col_max, j);
-                    row_min = min(row_min, i);
-                    col_min = min(col_min, j);
+                    if (i > row_max)
+                        row_max = i;
+                    if (i < row_min)
+                        row_min = i;
+                    if (j > col_max)
+                        col_max = j;
+                    if (j < col_min)
+                        col_min = j;
                 }
             }
         }
