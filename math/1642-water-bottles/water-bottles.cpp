@@ -7,7 +7,7 @@ public:
             carry += numBottles % numExchange;
             numBottles /= numExchange;
             if (carry >= numExchange) {
-                numBottles += carry / numExchange;
+                numBottles++;
                 carry %= numExchange;
             }
         }
