@@ -4,18 +4,17 @@ public:
         int n = nums.size();
         if (n < 3)
             return 0;
-        int result = 0, temp = 0;
-        int prev = nums[1] - nums[0];
-        for (int i = 1; i < n - 1; i++) {
-            int diff = nums[i + 1] - nums[i];
-            if (diff == prev)
-                temp++;
-            else {
-                prev = diff;
-                temp = 0;
-            }
-            result += temp;
+
+        vector<int> dp(n, 0);
+        int total = 0;
+
+        for (int i = 2; i < n; i++) {
+            if (nums[i - 1] - nums[i - 2] == nums[i] - nums[i - 1])
+                dp[i] = dp[i - 1] + 1;
+
+            total += dp[i];
         }
-        return result;
+
+        return total;
     }
 };
